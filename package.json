@@ -1,0 +1,12 @@
+{
+  "name": "ejercicios-ciclos",
+  "version": "1.0.0",
+  "description": "Proyecto de ejercicios con ciclos",
+  "main": "src/principal.js",
+  "type": "module",
+  "scripts": {
+    "test": "node test/ejercicio.test.js"
+  },
+  "author": "tu-nombre",
+  "license": "ISC"
+}
