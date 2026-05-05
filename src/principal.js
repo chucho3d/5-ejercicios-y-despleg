@@ -2,9 +2,11 @@ import * as combine from "./combine.js";
 
 const operacionSelect = document.getElementById("operacion");
 const resultadosDiv = document.getElementById("resultados");
-const testDiv = document.getElementById("testResultados"); // 🔥 NUEVO
+const testDiv = document.getElementById("testResultados");
+
 const ejecutar = document.getElementById("ejecutar");
 const btnTest = document.getElementById("testear");
+const btnTestTodos = document.getElementById("testTodos"); // 🔥 NUEVO
 
 
 // 🔹 EJECUTAR EJERCICIOS
@@ -22,23 +24,18 @@ function calcular() {
             case "eje16":
                 resultado = combine.eje16.fnPromedioVector();
                 break;
-
             case "eje17":
                 resultado = combine.eje17.fnEliminarDuplicados();
                 break;
-
             case "eje18":
                 resultado = combine.eje18.fnOrdenarBurbuja();
                 break;
-
             case "eje19":
                 resultado = combine.eje19.fnProductoWhile();
                 break;
-
             case "eje20":
                 resultado = combine.eje20.fnContarVocales();
                 break;
-
             default:
                 throw new Error("Operación no válida");
         }
@@ -51,7 +48,7 @@ function calcular() {
 }
 
 
-// 🔹 EJECUTAR TEST
+// 🔹 TEST INDIVIDUAL
 function ejecutarTest() {
     const operacion = operacionSelect.value;
 
@@ -61,28 +58,45 @@ function ejecutarTest() {
         case "eje16":
             mensaje = testPromedio();
             break;
-
         case "eje17":
             mensaje = testDuplicados();
             break;
-
         case "eje18":
             mensaje = testOrdenar();
             break;
-
         case "eje19":
             mensaje = testProducto();
             break;
-
         case "eje20":
             mensaje = testVocales();
             break;
-
         default:
             mensaje = "Selecciona un ejercicio";
     }
 
-    mostrarTest(mensaje); // 🔥 AQUÍ ESTÁ EL CAMBIO
+    mostrarTest(mensaje);
+}
+
+
+// 🔥 TEST TODOS (NUEVO)
+function ejecutarTodosLosTests() {
+
+    let resultados = [];
+
+    resultados.push(testPromedio());
+    resultados.push(testDuplicados());
+    resultados.push(testOrdenar());
+    resultados.push(testProducto());
+    resultados.push(testVocales());
+
+    // Mostrar lista
+    let html = resultados.map(r => `<div>${r}</div>`).join("");
+
+    // contador tipo juego 🎯
+    let correctos = resultados.filter(r => r.includes("✅")).length;
+    html += `<hr>🎯 ${correctos}/5 correctos`;
+
+    mostrarTest(html);
 }
 
 
@@ -122,24 +136,23 @@ function testVocales() {
 }
 
 
-// 🔹 MOSTRAR RESULTADO PRINCIPAL
+// 🔹 MOSTRAR RESULTADO
 function mostrarResultado(mensaje, tipo = "success") {
     resultadosDiv.textContent = mensaje;
     resultadosDiv.className = `result ${tipo}`;
 }
 
 
-// 🔹 MOSTRAR TEST (CUADRO)
+// 🔹 MOSTRAR TEST
 function mostrarTest(mensaje) {
     testDiv.innerHTML = mensaje;
 
-    // quitar estilos previos
     testDiv.classList.remove("test-ok", "test-error");
 
-    if (mensaje.includes("✅")) {
-        testDiv.classList.add("test-ok");
-    } else if (mensaje.includes("❌")) {
+    if (mensaje.includes("❌")) {
         testDiv.classList.add("test-error");
+    } else {
+        testDiv.classList.add("test-ok");
     }
 }
 
@@ -147,5 +160,6 @@ function mostrarTest(mensaje) {
 // 🔹 EVENTOS
 ejecutar.addEventListener("click", calcular);
 btnTest.addEventListener("click", ejecutarTest);
+btnTestTodos.addEventListener("click", ejecutarTodosLosTests); // 🔥 NUEVO
 
 console.log("Sistema listo 👍");

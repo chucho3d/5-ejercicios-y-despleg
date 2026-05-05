@@ -44,13 +44,14 @@
         }
 
         button {
-            margin-top: 15px;
+            margin-top: 10px;
             padding: 10px 15px;
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
             border: none;
             transition: 0.3s;
+            width: 90%;
         }
 
         #ejecutar {
@@ -58,9 +59,27 @@
             color: black;
         }
 
+        #ejecutar:hover {
+            box-shadow: 0 0 15px #00f0ff;
+        }
+
         #testear {
             background: #8b5cf6;
             color: white;
+        }
+
+        #testear:hover {
+            box-shadow: 0 0 15px #8b5cf6;
+        }
+
+        /* 🔥 NUEVO BOTÓN TEST TODOS */
+        #testTodos {
+            background: #22c55e;
+            color: black;
+        }
+
+        #testTodos:hover {
+            box-shadow: 0 0 15px #22c55e;
         }
 
         button:hover {
@@ -73,7 +92,6 @@
             font-weight: bold;
         }
 
-        /* 🔥 CUADRO DE TEST */
         #testResultados {
             margin-top: 12px;
             padding: 10px;
@@ -119,10 +137,10 @@
 
     <button id="ejecutar">Ejecutar</button>
     <button id="testear">Test</button>
+    <button id="testTodos">Test Todos</button>
 
     <div class="result" id="resultados">Resultados...</div>
 
-    <!-- 🔥 CUADRO DE TEST -->
     <div id="testResultados">Test...</div>
 
     <div id="cajas"></div>
